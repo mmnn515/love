@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gửi em yêu ❤️</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, "Segoe UI", Tahoma, sans-serif;
+            color: #6d2940;
+            background: linear-gradient(
+                135deg,
+                #ffd9e5,
+                #fff7fa,
+                #ffd0df
+            );
+            overflow-x: hidden;
+        }
+
+        button {
+            font-family: Arial, "Segoe UI", Tahoma, sans-serif;
+        }
+
+        /* =========================
+           TRANG CHÍNH
+        ========================== */
+
+        #home {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .home-card {
+            width: 100%;
+            max-width: 850px;
+            padding: 45px 30px;
+            text-align: center;
+
+            background: rgba(255,255,255,0.88);
+            border-radius: 30px;
+
+            box-shadow:
+                0 20px 60px rgba(150,40,80,0.16);
+        }
+
+        .heart {
+            font-size: 70px;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        h1 {
+            margin-top: 15px;
+            font-size: 45px;
+            color: #b42552;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            margin: 15px auto 35px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        /* =========================
+           3 NÚT
+        ========================== */
+
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .time-btn {
+            min-height: 170px;
+            padding: 20px;
+            border: none;
+            border-radius: 25px;
+
+            background: white;
+            color: #a4234b;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 25px rgba(150,40,80,0.10);
+
+            transition: 0.25s;
+        }
+
+        .time-btn:hover {
+            transform: translateY(-8px);
+            box-shadow:
+                0 18px 35px rgba(150,40,80,0.18);
+        }
+
+        .time-btn span {
+            display: block;
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .time-btn strong {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        .time-btn small {
+            font-size: 13px;
+        }
+
+        /* =========================
+           MÀN HÌNH CHÚC
+        ========================== */
+
+        .screen {
+            display: none;
+
+            min-height: 100vh;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 750px;
+            max-height: 92vh;
+
+            overflow-y: auto;
+
+            padding: 40px 30px;
+
+            background: rgba(255,255,255,0.92);
+
+            border-radius: 30px;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 60px rgba(150,40,80,0.16);
+        }
+
+        .icon {
+            font-size: 65px;
+            animation: heartbeat 1.2s infinite;
+            display: inline-block;
+        }
+
+        h2 {
+            margin-top: 15px;
+
+            font-size: 38px;
+            line-height: 1.3;
+
+            color: #b42552;
+        }
+
+        .message {
+            max-width: 620px;
+
+            margin: 25px auto;
+
+            font-family:
+                Arial,
+                "Segoe UI",
+                Tahoma,
+                sans-serif;
+
+            font-size: 18px;
+            line-height: 1.9;
+
+            text-align: center;
+        }
+
+        .highlight {
+            color: #be2c58;
+            font-weight: bold;
+        }
+
+        /* =========================
+           NHẠC
+        ========================== */
+
+        .music-box {
+            margin: 25px auto;
+
+            max-width: 620px;
+
+            padding: 20px;
+
+            border-radius: 20px;
+
+            background: #fff0f5;
+
+            border: 1px solid #f4cfda;
+        }
+
+        .music-title {
+            font-weight: bold;
+
+            color: #a4234b;
+
+            margin-bottom: 15px;
+        }
+
+        audio {
+            width: 100%;
+            display: block;
+        }
+
+        .music-btn {
+            margin-top: 15px;
+
+            padding: 13px 22px;
+
+            border: none;
+
+            border-radius: 30px;
+
+            background: #c63260;
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 16px;
+        }
+
+        .music-btn:hover {
+            background: #a9234b;
+        }
+
+        .status {
+            margin-top: 10px;
+
+            font-size: 13px;
+
+            color: #8f5368;
+        }
+
+        /* =========================
+           NÚT QUAY LẠI
+        ========================== */
+
+        .back-btn {
+            margin-top: 10px;
+
+            padding: 11px 20px;
+
+            border: none;
+
+            border-radius: 25px;
+
+            background: #f0b3c5;
+
+            color: #69243d;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           TIM BAY
+        ========================== */
+
+        .floating-heart {
+            position: fixed;
+
+            bottom: -50px;
+
+            z-index: 1;
+
+            pointer-events: none;
+
+            animation: fly linear forwards;
+        }
+
+        @keyframes fly {
+
+            0% {
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform:
+                    translateY(-120vh)
+                    rotate(360deg);
+
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           ĐIỆN THOẠI
+        ========================== */
+
+        @media (max-width: 700px) {
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .home-card {
+                padding: 30px 18px;
+            }
+
+            .time-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .time-btn {
+                min-height: 120px;
+            }
+
+            .time-btn span {
+                font-size: 40px;
+            }
+
+            .card {
+                padding: 30px 18px;
+            }
+
+            h2 {
+                font-size: 29px;
+            }
+
+            .message {
+                font-size: 17px;
+                line-height: 1.8;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         TRANG ĐẦU
+    ========================== -->
+
+    <section id="home">
+
+        <div class="home-card">
+
+            <div class="heart">
+                ❤️
+            </div>
+
+            <h1>
+                Gửi em yêu của anh
+            </h1>
+
+            <p class="subtitle">
+                Mỗi thời điểm trong ngày,
+                anh đều có một lời muốn nói với em... 💕
+                <br>
+                Em chọn một ô đi nhé!
+            </p>
+
+            <div class="time-grid">
+
+                <button
+                    class="time-btn"
+                    onclick="openScreen('morning')">
+
+                    <span>🌅</span>
+
+                    <strong>
+                        Buổi sáng
+                    </strong>
+
+                    <small>
+                        Chào ngày mới cùng anh ❤️
+                    </small>
+
+                </button>
+
+
+                <button
+                    class="time-btn"
+                    onclick="openScreen('afternoon')">
+
+                    <span>🌤️</span>
+
+                    <strong>
+                        Buổi chiều
+                    </strong>
+
+                    <small>
+                        Một chút yêu thương gửi em 💗
+                    </small>
+
+                </button>
+
+
+                <button
+                    class="time-btn"
+                    onclick="openScreen('night')">
+
+                    <span>🌙</span>
+
+                    <strong>
+                        Buổi tối
+                    </strong>
+
+                    <small>
+                        Ngủ ngon nhé cô gái của anh 💕
+                    </small>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BUỔI SÁNG
+    ========================== -->
+
+    <section
+        class="screen"
+        id="morning">
+
+        <div class="card">
+
+            <div class="icon">
+                🌅❤️
+            </div>
+
+            <h2>
+                Chúc em buổi sáng vui vẻ!
+            </h2>
+
+            <div class="message">
+
+                Chúc em một buổi sáng thật dịu dàng,
+                thức dậy với một nụ cười thật xinh
+                và bắt đầu ngày mới với thật nhiều năng lượng. ☀️
+
+                <br><br>
+
+                Mong rằng hôm nay mọi điều tốt đẹp
+                sẽ nhẹ nhàng tìm đến em.
+
+                <br><br>
+
+                Dù anh không thể lúc nào cũng ở bên cạnh,
+                nhưng mong em biết rằng
+
+                <span class="highlight">
+                    vừa mở mắt ra đã có một người nhớ em rồi.
+                </span>
+
+                <br><br>
+
+                Chúc cô gái của anh một ngày thật vui,
+                thật may mắn và thật bình yên nhé. 💕
+
+            </div>
+
+
+            <!-- NHẠC -->
+
+            <div class="music-box">
+
+                <div class="music-title">
+                    🎵 Hơn Cả Yêu - Đức Phúc
+                </div>
+
+                <audio
+                    class="love-audio"
+                    controls
+                    preload="metadata">
+
+                    <source
+                        src="./Đức Phúc - Hơn Cả Yêu (Official Music Video).mp3"
+                        type="audio/mpeg">
+
+                    Trình duyệt của bạn không hỗ trợ phát nhạc.
+
+                </audio>
+
+
+                <button
+                    class="music-btn"
+                    onclick="toggleMusic()">
+
+                    ▶ Phát / ⏸ Dừng
+
+                </button>
+
+
+                <div class="status">
+
+                    Bấm nút Play hoặc nút Phát / Dừng để nghe.
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="back-btn"
+                onclick="goHome()">
+
+                ← Quay lại
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BUỔI CHIỀU
+    ========================== -->
+
+    <section
+        class="screen"
+        id="afternoon">
+
+        <div class="card">
+
+            <div class="icon">
+                🌤️💗
+            </div>
+
+            <h2>
+                Chúc em buổi chiều vui vẻ!
+            </h2>
+
+            <div class="message">
+
+                Buổi sáng đã đi qua rồi,
+                anh lại ghé qua đây để nhắc em một điều...
+
+                <br><br>
+
+                Đừng làm việc hay học tập quá mệt nhé.
+                Nhớ uống nước, nghỉ ngơi một chút
+                và chăm sóc bản thân thật tốt.
+
+                <br><br>
+
+                Có thể anh không xuất hiện trước mặt em,
+                nhưng
+
+                <span class="highlight">
+                    anh vẫn luôn nghĩ về em.
+                </span>
+
+                <br><br>
+
+                Chúc em buổi chiều thật nhẹ nhàng,
+                mọi chuyện thuận lợi
+                và luôn giữ nụ cười xinh ấy nhé. 💕
+
+            </div>
+
+
+            <div class="music-box">
+
+                <div class="music-title">
+                    🎵 Hơn Cả Yêu - Đức Phúc
+                </div>
+
+                <audio
+                    class="love-audio"
+                    controls
+                    preload="metadata">
+
+                    <source
+                        src="./Đức Phúc - Hơn Cả Yêu (Official Music Video).mp3"
+                        type="audio/mpeg">
+
+                </audio>
+
+                <button
+                    class="music-btn"
+                    onclick="toggleMusic()">
+
+                    ▶ Phát / ⏸ Dừng
+
+                </button>
+
+                <div class="status">
+                    Bấm nút Play hoặc nút Phát / Dừng để nghe.
+                </div>
+
+            </div>
+
+
+            <button
+                class="back-btn"
+                onclick="goHome()">
+
+                ← Quay lại
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BUỔI TỐI
+    ========================== -->
+
+    <section
+        class="screen"
+        id="night">
+
+        <div class="card">
+
+            <div class="icon">
+                🌙❤️
+            </div>
+
+            <h2>
+                Chúc em buổi tối an lành!
+            </h2>
+
+            <div class="message">
+
+                Một ngày nữa lại sắp kết thúc rồi.
+
+                <br><br>
+
+                Anh mong hôm nay em đã có thật nhiều niềm vui
+                và không gặp điều gì khiến em buồn.
+
+                <br><br>
+
+                Nếu hôm nay có mệt mỏi,
+                thì hãy để mọi chuyện ở lại phía sau nhé.
+
+                <br><br>
+
+                Tối nay ngủ thật ngon,
+                để ngày mai thức dậy
+                lại là một cô gái vui vẻ và rạng rỡ.
+
+                <br><br>
+
+                Biết đâu trong giấc mơ tối nay,
+
+                <span class="highlight">
+                    anh sẽ đến ôm em một cái thật lâu.
+                </span>
+
+                🫂
+
+                <br><br>
+
+                <span class="highlight">
+                    Ngủ ngon nhé em.
+                    Anh thương em rất nhiều. ❤️
+                </span>
+
+            </div>
+
+
+            <div class="music-box">
+
+                <div class="music-title">
+                    🎵 Hơn Cả Yêu - Đức Phúc
+                </div>
+
+                <audio
+                    class="love-audio"
+                    controls
+                    preload="metadata">
+
+                    <source
+                        src="./Đức Phúc - Hơn Cả Yêu (Official Music Video).mp3"
+                        type="audio/mpeg">
+
+                </audio>
+
+                <button
+                    class="music-btn"
+                    onclick="toggleMusic()">
+
+                    ▶ Phát / ⏸ Dừng
+
+                </button>
+
+                <div class="status">
+                    Bấm nút Play hoặc nút Phát / Dừng để nghe.
+                </div>
+
+            </div>
+
+
+            <button
+                class="back-btn"
+                onclick="goHome()">
+
+                ← Quay lại
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <script>
+
+        /* =========================
+           DANH SÁCH NHẠC
+        ========================== */
+
+        const audios =
+            document.querySelectorAll(".love-audio");
+
+
+        /* =========================
+           MỞ TRANG CHÚC
+        ========================== */
+
+        function openScreen(name) {
+
+            document
+                .getElementById("home")
+                .style.display = "none";
+
+
+            document
+                .querySelectorAll(".screen")
+                .forEach(function(screen) {
+
+                    screen.classList.remove("active");
+
+                });
+
+
+            document
+                .getElementById(name)
+                .classList.add("active");
+
+
+            window.scrollTo(0, 0);
+
+        }
+
+
+        /* =========================
+           QUAY LẠI TRANG CHÍNH
+        ========================== */
+
+        function goHome() {
+
+            audios.forEach(function(audio) {
+
+                audio.pause();
+
+                audio.currentTime = 0;
+
+            });
+
+
+            document
+                .querySelectorAll(".screen")
+                .forEach(function(screen) {
+
+                    screen.classList.remove("active");
+
+                });
+
+
+            document
+                .getElementById("home")
+                .style.display = "flex";
+
+
+            window.scrollTo(0, 0);
+
+        }
+
+
+        /* =========================
+           PHÁT / DỪNG NHẠC
+        ========================== */
+
+        function toggleMusic() {
+
+            const current =
+                document.querySelector(".screen.active");
+
+            if (!current) {
+                return;
+            }
+
+
+            const audio =
+                current.querySelector(".love-audio");
+
+
+            audios.forEach(function(item) {
+
+                if (item !== audio) {
+
+                    item.pause();
+
+                }
+
+            });
+
+
+            if (audio.paused) {
+
+                audio.play().catch(function(error) {
+
+                    alert(
+                        "Không phát được nhạc.\n\n" +
+                        "Hãy kiểm tra file:\n" +
+                        "Đức Phúc - Hơn Cả Yêu (Official Music Video).mp3"
+                    );
+
+                });
+
+            } else {
+
+                audio.pause();
+
+            }
+
+        }
+
+
+        /* =========================
+           TRÁI TIM BAY
+        ========================== */
+
+        const heartList = [
+            "❤️",
+            "💕",
+            "💗",
+            "💖",
+            "💘",
+            "💝",
+            "💓"
+        ];
+
+
+        function createHeart() {
+
+            const heart =
+                document.createElement("div");
+
+
+            heart.className =
+                "floating-heart";
+
+
+            heart.textContent =
+                heartList[
+                    Math.floor(
+                        Math.random() *
+                        heartList.length
+                    )
+                ];
+
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+
+            heart.style.fontSize =
+                20 + Math.random() * 30 + "px";
+
+
+            heart.style.animationDuration =
+                6 + Math.random() * 5 + "s";
+
+
+            document.body.appendChild(heart);
+
+
+            setTimeout(function() {
+
+                heart.remove();
+
+            }, 12000);
+
+        }
+
+
+        setInterval(createHeart, 500);
+
+
+    </script>
+    <script>
+document.addEventListener("click", function () {
+    const audio = document.querySelector(".love-audio");
+
+    if (audio) {
+        audio.loop = true;
+        audio.volume = 0.7;
+        audio.play().catch(function (err) {
+            console.log("Lỗi phát nhạc:", err);
+        });
+    }
+}, { once: true });
+</script>
+</body>
+</html>
